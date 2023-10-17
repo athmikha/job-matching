@@ -102,8 +102,8 @@ def transition(request):
     
     # Read input data from CSV file
     
-    input_file = open(os.path.join(BASE_DIR / 'upload',"transition.csv"),"r")
-    df = pd.read_csv(input_file)
+   # input_file = open(os.path.join(BASE_DIR / 'upload',"\ml project\job-matching\ml\upload\transition.csv"),"r")
+    df = pd.read_csv(r"D:\ml project\job-matching\ml\upload\transition.csv")
     
     # Convert role names to numerical values
     role_mapping = {role: index for index, role in enumerate(df['CurrentRole'].unique())}
@@ -150,7 +150,7 @@ def transition(request):
     return render(request,"roletransition.html",{'a':a,'b':predicted_role_name})
                     
 def dynamiccand(request):
-    resumeDataSet = pd.read_csv(r"C:\Users\Barath K\Downloads\UpdatedResumeDataSet.csv")
+    resumeDataSet = pd.read_csv(r"\UpdatedResumeDataSet.csv")
     resumeDataSet['cleaned_resume'] = ''
     resumeDataSet.head()
     print ("Displaying the distinct categories of resume and the number of records belonging to each category:\n\n")
