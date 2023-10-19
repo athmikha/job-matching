@@ -147,6 +147,10 @@ canvas {
   border-radius: 5px;
 }
 #percentagePieChart {
-            max-width: 30px;
-            max-height: 20px;
+            max-width: 200px;
+            max-height: 200px;
         }
+#percentageHistogram{
+  max-width: 200px;
+  max-height: 200px;
+}

@@ -1,68 +1,87 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 {% extends 'base.html' %}
 
-
-
 {% block content %}
-
     <div class="container-fluid" style="margin-top: 50px;">
-        <div class="head" >
+        <div class="head">
             <div class="three">
                 <h1 style="color:#f6f6f8"> Percentage Score for JOB  </h1>
             </div>
-                       
             <br>
-            <h3 style="color:#f6f6f8">{{a}}</h3>
+            <h3 style="color:#f6f6f8">{{ a }}</h3>
             <br>
             <div class="three">
                 <h1 style="color:#f6f6f8"> Percentage Score for JOB  </h1>
             </div>
-            
             <br>
             <h3 style="color:#f6f6f8">70.5</h3>
             <br>
             <div class="three">
                 <h1 style="color:#f6f6f8"> Percentage Score for JOB  </h1>
             </div>
-            
             <br>
             <h3 style="color:#f6f6f8">71.7</h3>
             <br>
-          
 
+            <!-- Add a canvas for the pie chart initially hidden -->
+            <canvas id="percentagePieChart" width="400" height="200" style="display: none;"></canvas>
+            <button id="showPieChartBtn" class="btn" style="background-color: #23395d; color: #ffffff;">
+                Show Pie Chart
+            </button>
 
+            <!-- Add a canvas for the histogram initially hidden -->
+            <canvas id="percentageHistogram" width="400" height="200" style="display: none;"></canvas>
+            <button id="showHistogramBtn" class="btn" style="background-color: #23395d; color: #ffffff;">
+                Show Histogram
+            </button>
 
-           <canvas id="percentagePieChart" ></canvas>
-          
-        
+            <script>
+                var showPieChartBtn = document.getElementById("showPieChartBtn");
+                showPieChartBtn.addEventListener("click", function () {
+                    var pieChartCanvas = document.getElementById("percentagePieChart");
+                    var Job1 = {{ a }};
+                    var Job2 = 70.5;
+                    var Job3 = 71.5;
+                    var ctx = pieChartCanvas.getContext('2d');
+                    var chart = new Chart(ctx, {
+                        type: 'pie',
+                        data: {
+                            labels: ["Job 1", "Job 2", "Job 3"],
+                            datasets: [{
+                                data: [Job1, Job2, Job3],
+                                backgroundColor: ['#75c0c0', '#eeeeee', '#524f4f'],
+                            }]
+                        }
+                    });
+                    pieChartCanvas.style.display = "block";
+                });
 
-
-<button id="showPieChartBtn" class="btn" style="background-color: #23395d; color: #ffffff;">
-    Show Pie Chart
-</button>
-
-        <script>
-            var pieChartCanvas = document.getElementById("percentagePieChart");
-            var Job1 = {{ a }}; 
-            var Job2 = 70.5;
-            var Job3 = 71.5;
-
-            // Create the pie chart
-            var ctx = pieChartCanvas.getContext('2d');
-            var chart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: ["Job 1", "Job 2 ", "Job 3"],
-                    datasets: [{
-                        data: [Job1, Job2, Job3],
-                        backgroundColor: ['#75c0c0', '#eeeeee', '#524f4f'],
-                    }]
-                }
-            });
-        </script>
-
-            </div>
-</div>
-</div>
+                var showHistogramBtn = document.getElementById("showHistogramBtn");
+                showHistogramBtn.addEventListener("click", function () {
+                    var histogramCanvas = document.getElementById("percentageHistogram");
+                    var data = [{{ a }}, 70.5, 71.7];  // Replace with your actual data
+                    var ctx = histogramCanvas.getContext('2d');
+                    var chart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ["Job 1", "Job 2", "Job 3"],
+                            datasets: [{
+                                label: "Percentage Score",
+                                data: data,
+                                backgroundColor: ['#75c0c0', '#eeeeee', '#524f4f'],
+                            }],
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                },
+                            },
+                        },
+                    });
+                    histogramCanvas.style.display = "block";
+                });
+            </script>
+        </div>
+    </div>
 {% endblock content %}
-
