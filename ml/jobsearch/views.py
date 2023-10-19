@@ -7,6 +7,8 @@ from scipy.sparse import hstack
 from cryptography.fernet import Fernet  # For data encryption
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from django.conf import settings
+from django.conf.urls.static import static
 
 from .forms import CreateForm
 import seaborn as sns
@@ -155,10 +157,21 @@ def transition(request):
     else:
         print("No specific skills recommended for this role.")
 
-    # Render the 'roletransition.html' template with the recommended skills
-    return render(request, "roletransition.html", {'a': a, 'b': predicted_role_name})
+    # Data Visualization: Create a bar chart for recommended skills
+    if predicted_role in recommended_skills.keys():
+        plt.figure(figsize=(10, 6))
+        plt.bar(recommended_skills[predicted_role], [1] * len(recommended_skills[predicted_role]))
+        plt.xlabel("Skills")
+        plt.ylabel("Recommended")
+        plt.title("Recommended Skills for Predicted Role")
+        plt.xticks(rotation=45, ha='right')
+        plt.tight_layout()
 
+        # Save the plot as an image (optional)
+        plt.savefig(os.path.join(settings.MEDIA_ROOT, 'recommended_skills.png'), bbox_inches='tight')
+        return render(request, "roletransition.html", {'a': a, 'b': predicted_role_name, 'chart_img': '/upload/recommended_skills.png'})
 
+    
                     
 def dynamiccand(request):
     resumeDataSet = pd.read_csv(r"\UpdatedResumeDataSet.csv")

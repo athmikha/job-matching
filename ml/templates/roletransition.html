@@ -2,23 +2,26 @@
 {% load static %}
 
 {% block content %}
-    <div class="container-fluid" style="margin-top: 50px;">
-        <div class="head">
-            <div class="three">
-                <h1 style="color: #FFFFFF">Predicted Role : </h1>
-                <h2 style="color: #FFFFFF">{{ b }}</h2>
-                <br/>
-                <h1 style="color: #FFFFFF">Skills to be Learned</h1>
-            </div>
-            <br>
-            <h3 style="color: #FFFFFF">
-                <ul>
-                    {% for i in a %}
-                        <li>{{ i }}</li>
-                    {% endfor %}
-                </ul>
-            </h3>
-            <br>
+<div class="container-fluid" style="margin-top: 50px;">
+    <div class="head">
+        <div class="three">
+            <h1 style="color: #FFFFFF">Predicted Role :</h1>
+            <h2 style="color: #FFFFFF">{{ b }}</h2>
+            <br />
+            <h1 style="color: #FFFFFF">Skills to be Learned</h1>
         </div>
+        <br>
+        <h3 style="color: #FFFFFF">
+            <ul>
+                {% for i in a %}
+                <li>{{ i }}</li>
+                {% endfor %}
+            </ul>
+        </h3>
+        <br>
+        {% if chart_img %}
+        <img src="{{ chart_img }}" alt="Recommended Skills Chart" style="max-height: 50%;max-width: 50%;">
+        {% endif %}
     </div>
+</div>
 {% endblock %}
