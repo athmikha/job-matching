@@ -1,68 +1,55 @@
 {% extends 'base.html' %}
-
-
+{% load static %}
 
 {% block content %}
+<div class="container-fluid" style="margin-top: 50px;">
+    <div class="head" style="background-color: #524f4f; color: #23395d; padding: 20px; border-radius: 10px;">
+        <h1>Upload the Resume for Searching job</h1>
 
-    <div class="container-fluid" style="margin-top: 50px;">
-        <div class="head" >
-            <div class="three">
-                <h1 style="color:#23395d">Upload the Resume for Searching job</h1>
-            </div>
-
-            {% if messages %}
-            {% for message in messages %}
-                {% if message.tags == 'error'%}
-                    <div class="alert fails">
-                        <span class="closebtn">&times;</span>  
-                        {{message}}
-                    </div>
-                    
-                {% else %}
-                    <div class="alert success">
-                        <span class="closebtn">&times;</span>  
-                        {{message}}
-                    </div>
-                    
-                    <br>
-                    <br>
-                    <div class="sample">
+        {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+                <div class="alert fails" style="background-color: #ff5733; color: #ffffff;">
+                    <span class="closebtn" style="color: #ffffff;">&times;</span>
+                    {{message}}
+                </div>
+            {% else %}
+                <div class="alert success" style="background-color: #75c0c0; color: #23395d;">
+                    <span class="closebtn" style="color: #23395d;">&times;</span>
+                    {{message}}
+                    <div class="sample" style="color: #23395d;">
                         {{some_string}}
                     </div>
-                    <br />
 
-
-                {% endif %}
-                {% endfor %}
-            {% endif %}
-            <br>
-            <form action="{% url 'createfile' %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div>
-                    <label><h3>Resume</h3></label>
-                    {{form.resume_file}}
                 </div>
                 <br>
-                <button type="submit" class="btn">Submit</button>
-                
-            
-            </form>
-        </div>
-    </div>
+                <br>
+               
+                <br />
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+        <br>
+        <form action="{% url 'createfile' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <label><h3>Resume</h3></label>
+                {{form.resume_file}}
+            </div>
+            <br>
+            <button type="submit" class="btn" style="background-color: #23395d; color: #ffffff;" id="submitBtn">Submit</button>
+        </form>
 
+        <!-- Add a canvas for the pie chart initially hidden -->
+        <canvas id="percentagePieChart" width="400" height="200" style="display: none;"></canvas>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+        <script>
+            var submitBtn = document.getElementById("submitBtn");
+           
 
-    <script>
-        var close = document.getElementsByClassName("closebtn");
-        var i;
-        
-        for (i = 0; i < close.length; i++) {
-          close[i].onclick = function(){
-            var div = this.parentElement;
-            div.style.opacity = "0";
-            setTimeout(function(){ div.style.display = "none"; }, 600);
-          }
-        }
+           
         </script>
-
+    </div>
+</div>
 {% endblock content %}

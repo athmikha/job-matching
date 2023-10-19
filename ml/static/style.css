@@ -26,8 +26,6 @@
     background-color: #23395d;
   }
 
-
-
   .six h1 {
     text-align: center;
     color:#222; font-size:30px; font-weight:400;
@@ -115,3 +113,40 @@
 
     
 }
+body {
+  background: linear-gradient(to bottom, #654ea3, #0083e8);
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.container-fluid {
+  padding: 20px;
+}
+
+.head {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+  padding: 20px;
+}
+
+h1, h2 {
+  color: #fff;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 10px;
+}
+
+canvas {
+  background: #fff;
+  border-radius: 5px;
+}
+#percentagePieChart {
+            max-width: 30px;
+            max-height: 20px;
+        }

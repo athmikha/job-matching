@@ -1,3 +1,4 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 {% extends 'base.html' %}
 
 
@@ -7,18 +8,61 @@
     <div class="container-fluid" style="margin-top: 50px;">
         <div class="head" >
             <div class="three">
-                <h1 style="color:#23395d"> Percentage Score for JOB  1</h1>
+                <h1 style="color:#f6f6f8"> Percentage Score for JOB  </h1>
             </div>
-                        <br>
+                       
             <br>
-            <h3 style="color:#23395d">{{a}}</h3>
+            <h3 style="color:#f6f6f8">{{a}}</h3>
             <br>
-        </div>
-        <h3 style="color:#23395d">Percentage Score for JOB  2</h3>
-        <h3 style="color:#23395d"> 82.5</h3>
-        <h3 style="color:#23395d">Percentage Score for JOB  3</h3>
-        <h3 style="color:#23395d"> 80.5</h3>
+            <div class="three">
+                <h1 style="color:#f6f6f8"> Percentage Score for JOB  </h1>
+            </div>
+            
+            <br>
+            <h3 style="color:#f6f6f8">70.5</h3>
+            <br>
+            <div class="three">
+                <h1 style="color:#f6f6f8"> Percentage Score for JOB  </h1>
+            </div>
+            
+            <br>
+            <h3 style="color:#f6f6f8">71.7</h3>
+            <br>
+          
 
-    </div>
 
+
+           <canvas id="percentagePieChart" ></canvas>
+          
+        
+
+
+<button id="showPieChartBtn" class="btn" style="background-color: #23395d; color: #ffffff;">
+    Show Pie Chart
+</button>
+
+        <script>
+            var pieChartCanvas = document.getElementById("percentagePieChart");
+            var Job1 = {{ a }}; 
+            var Job2 = 70.5;
+            var Job3 = 71.5;
+
+            // Create the pie chart
+            var ctx = pieChartCanvas.getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ["Job 1", "Job 2 ", "Job 3"],
+                    datasets: [{
+                        data: [Job1, Job2, Job3],
+                        backgroundColor: ['#75c0c0', '#eeeeee', '#524f4f'],
+                    }]
+                }
+            });
+        </script>
+
+            </div>
+</div>
+</div>
 {% endblock content %}
+

@@ -36,9 +36,15 @@ from sklearn.metrics import accuracy_score
 from pandas.plotting import scatter_matrix
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn import metrics
+from sklearn.tree import export_graphviz
+import matplotlib.pyplot as plt
+import graphviz
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # finding the job based on resume
+
+
 def home(request):
     create_form=CreateForm()
     context={'form':create_form}
@@ -98,17 +104,19 @@ def createfile(request):
                 a=str(MatchPercentage)
     return render(request,"sign.html",{'a':a})
 
+# Import necessary libraries at the beginning of your code
+
+# ... (existing imports and code) ...
+
+# Define the transition function as you have it
+
 def transition(request):
-    
     # Read input data from CSV file
-    
-   # input_file = open(os.path.join(BASE_DIR / 'upload',"\ml project\job-matching\ml\upload\transition.csv"),"r")
     df = pd.read_csv(r"D:\ml project\job-matching\ml\upload\transition.csv")
     
     # Convert role names to numerical values
-    role_mapping = {role: index for index, role in enumerate(df['CurrentRole'].unique())}
+    role_mapping = {role: str(index) for index, role in enumerate(df['CurrentRole'].unique())}
     df['CurrentRole'] = df['CurrentRole'].map(role_mapping)
-
 
     # Separate features (current skills) and target (desired role)
     X = df.drop(['EmployeeID', 'CurrentRole'], axis=1)
@@ -137,7 +145,7 @@ def transition(request):
         recommended_skills[role] = skills_for_role
     print(recommended_skills)
 
-    a=[]
+    a = []
     # Sample tailored development plan based on the predicted role
     if predicted_role in recommended_skills.keys():
         print("Recommended Skills to Learn:")
@@ -146,8 +154,11 @@ def transition(request):
             a.append(skill)
     else:
         print("No specific skills recommended for this role.")
-        
-    return render(request,"roletransition.html",{'a':a,'b':predicted_role_name})
+
+    # Render the 'roletransition.html' template with the recommended skills
+    return render(request, "roletransition.html", {'a': a, 'b': predicted_role_name})
+
+
                     
 def dynamiccand(request):
     resumeDataSet = pd.read_csv(r"\UpdatedResumeDataSet.csv")
